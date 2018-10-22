@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CS4241 Assignment 2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.12/vue.js"></script>
+    <!-- Add "scoped" attribute to limit CSS to this component only -->
+    <style lang="scss">
+        .md-progress-bar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+        }
+
+        body{
+            background: url("/background.jpg") center;
+            background-size: cover;
+        }
+        small {
+            display: block;
+        }
+
+        h3 {
+            margin: 40px 0 0;
+            color: white;
+            margin: 15px;
+        }
+
+        h6 {
+          color: white;
+        }
+
+        nav {
+            text-align: center;
+            height: 50px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        a {
+            color: #42b983;
+        }
+
+        input {
+            margin: 8px;
+
+        }
+
+        div {
+            margin: 10px;
+        }
+
+        button {
+            margin: 15px;
+            align-items: right;
+        }
+
+        .btn {
+            background-color: #d3d3d3;
+
+        }
+
+        .btn:focus {
+            background-color: #85C1E9
+        }
+
+    </style>
+
+</head>
+
+<body background="/background.jpg">
+
+<!-- NAV BAR -->
+<nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <a class="btn" href="/">BACK</a>
+    </div>
+</nav>
+
+<!-- CONTAINER -->
+<div class="container">
+    <component :is="currentComponent" keep-alive></component>
+</div>
+
+<!-- qUESTIONS TEMPLATE -->
+<template id="questions-view" class="wallpaper">
+    <div id="app" class="">
+
+        <form class="vacationForm form-group form">
+            <p>
+            <h3 class="">Find your dream vacation!</h3>
+            </p>
+            <div class="">
+                <div class="">
+                    <h6>Name:</h6>
+                    <input id="name" class="form-control" type="text" onfocusout="fillForm()" name="name">
+                    <br>
+                </div>
+            </div>
+
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item md-small-size-100">
+                    <h6 for="type-vaca">What is your favorite type of vacation?</h6>
+                    <div class="switch-field">
+                        <input type="radio" id="party" name="type" value="party"/>
+                        <label for="party">Partying</label>
+                        <input type="radio" id="sightSeeing" name="type" value="sightSeeing"/>
+                        <label for="sightSeeing">Sightseeing</label>
+                        <input type="radio" id="Cultural" name="type" value="Cultural"/>
+                        <label for="Cultural">Cultural</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item md-small-size-100">
+
+                    <h6 for="cuis-pref">Does the type of cuisine matter to you?</h6>
+                    <div class="switch-field">
+                        <input type="radio" id="cuisineYes" name="cuisine" value="cuisineYes"/>
+                        <label for="cuisineYes">Yes</label>
+                        <input type="radio" id="cuisineNo" name="cuisine" value="cuisineNo"/>
+                        <label for="cuisineNo">No</label>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item md-small-size-100">
+
+                    <h6 for="type-area">What is your preferred type of environment?</h6>
+                    <div class="switch-field">
+                        <input type="radio" id="tropical" name="environment" value="tropical"/>
+                        <label for="tropical">Tropical</label>
+                        <input type="radio" id="coastal" name="environment" value="coastal"/>
+                        <label for="coastal">Coastal</label>
+                        <input type="radio" id="mountains" name="environment" value="mountains"/>
+                        <label for="mountains">Mountainous</label>
+                        <input type="radio" id="city" name="environment" value="city"/>
+                        <label for="city">City</label>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item md-small-size-100">
+
+                    <h6 for="temp-pref">What type of climate do you like?</h6>
+                    <div class="switch-field">
+                        <input type="radio" id="0-30" name="climate" value="0-30"/>
+                        <label for="0-30">0-30°F</label>
+                        <input type="radio" id="30-60" name="climate" value="30-60"/>
+                        <label for="30-60">30-60°F</label>
+                        <input type="radio" id="60+" name="climate" value="60+"/>
+                        <label for="60+">60+°F</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item md-small-size-100">
+                    <h6 for="cost-range">What price range are we looking at?</h6>
+                    <div class="switch-field">
+                        <input type="radio" id="costLow" name="cost" value="costLow"/>
+                        <label for="costLow">Low</label>
+                        <input type="radio" id="costMed" name="cost" value="costMed"/>
+                        <label for="costMed">Average</label>
+                        <input type="radio" id="costHigh" name="cost" value="costHigh"/>
+                        <label for="costHigh">High</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md-layout md-gutter">
+                <div class="md-layout-item md-small-size-100">
+
+                    <h6 for="act-level">What activity level do you usually prefer?</h6>
+                    <div class="switch-field">
+                        <input type="radio" id="activityLow" name="activities" value="activityLow"/>
+                        <label for="activityLow">Low</label>
+                        <input type="radio" id="activityMedium" name="activities" value="activityMedium"/>
+                        <label for="activityMedium">Normal</label>
+                        <input type="radio" id="activityHigh" name="activities" value="activityHigh"/>
+                        <label for="activityHigh">High</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-group-lg" onclick="toJSON()"
+                    v-on:click="changeTab('results-view', 'results-view')">Submit
+            </button>
+
+        </form>
+
+    </div>
+
+</template>
+
+<!-- Results page template -->
+<template id='results-view'>
+    <div class="md-layout md-gutter">
+        <div class="md-layout-item md-small-size-100">
+
+            <script type="text/javascript">
+                document.getElementById('vacationString').innerHTML = "Congratulations, you are going to " + vacationResult + "!"
+
+                document.getElementById('cardTitle').innerHTML =vacationResult
+            </script>
+            <h3 id="vacationString" align="center"></h3>
+
+                <div class="card align="center">
+
+                    <div id="map" style="height:500px;"></div>
+                      <div class="card-body">
+                        <h5 id = "cardTitle" class="card-title"></h5>
+                          <p  class="card-text">We hope you enjoy your visit!<br>Note: Try to drag-drop the orange person
+                              icon on the map to see a street-level view of this location!</p>
+                      </div>
+                    <script>
+                        function myMap() {
+                            let lat = 0;
+                            let long = 0;
+
+                            if(vacationResult === "bali"){
+                                lat = -8.409518;
+                                long = 115.188919;
+                            }
+                            if(vacationResult === "london"){
+                                lat = 51.508530;
+                                long = -0.076132;
+                            }
+                            if(vacationResult === "paris"){
+                                lat = 48.8566;
+                                long = 2.349014;
+                            }
+                            if(vacationResult === "rome"){
+                                lat = 41.890251;
+                                long = 12.492373;
+                            }
+                            if(vacationResult === "new york city"){
+                                lat = 40.730610;
+                                long = -73.935242;
+                            }
+                            if(vacationResult === "crete"){
+                                lat = 35.2401;
+                                long = 24.8093;
+                            }
+                            if(vacationResult === "barcelona"){
+                                lat = 41.3851;
+                                long = 2.1734;
+                            }
+                            if(vacationResult === "siem reap"){
+                                lat = 13.3550;
+                                long = 103.8552;
+                            }
+                            if(vacationResult === "prague"){
+                                lat = 50.0755;
+                                long = 14.4378;
+                            }
+                            if(vacationResult === "phuket"){
+                                lat = 7.9519;
+                                long = 98.3381;
+                            }
+                            if(vacationResult === "cusco"){
+                                lat = -13.52264;
+                                long = -71.96734;
+                            }
+
+                            var mapOptions = {
+                                center: new google.maps.LatLng(lat, long),
+                                zoom: 8,
+                                mapTypeId: google.maps.MapTypeId.HYBRID
+                            }
+                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                        }
+                    </script>
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsvkO6imt_7IYVXjmEBFOH_Cf0QCzUleI&callback=myMap"></script>
+                </div>
+            </div>
+        </div>
+</template>
+
+<!-- Vue.js instance -->
+<script>
+    Vue.component('questions-view', {
+        template: '#questions-view',
+        methods: {
+            changeTab: function (tabName, componentName) {
+                // Change the displayed name
+                v.currentPage = tabName;
+                // change the tab
+                v.currentComponent = componentName;
+            }
+        }
+    })
+
+
+    Vue.component('results-view', {
+        template: '#results-view'
+    })
+
+    let v = new Vue({
+        el: 'body',
+        data: {
+            currentComponent: 'questions-view',
+            currentPage: 'questions-view'
+        }
+
+    })
+
+</script>
+
+<script type="text/javascript">
+    let vacationResult = ""
+
+    function toJSON() {
+        vacationResult = ""
+        //Grab form answers 
+        const formData = $("form.vacationForm").serializeArray();
+        //Change format
+        let data = {};
+        results = []
+        $(formData).each(function (index, obj) {
+            data[obj.name] = obj.value;
+            //Create array of only results
+            results = Object.values(data);
+
+        });
+
+        console.log('What we are sending to alex algorithm: ' + results.toString())
+
+        //Call Alex's algorithm
+        vacationResult = generateUserResult(results);
+
+        //Set the result
+        data["result"] = vacationResult
+
+        getGooglePlaces(vacationResult);
+        const myJSON = JSON.stringify(data);
+
+        //Send to the server
+        apiaddOrUpdateRow(data);
+    }
+
+    function fillForm() {
+        const name = document.getElementById("name").value;
+        const object = JSON.parse(JSON.stringify({'name': name}));
+        apigetObjByName(object, getCallback);
+    }
+
+    function getCallback(json) {
+          $.each(json, function (key, data) {
+            console.log(data)
+            if (data !== undefined && key !== "name" && key !=="result") {
+              document.getElementById(data).value = data;
+              console.log(data)
+              let btn = document.getElementById(data);
+              btn.checked = true;
+            }
+          })
+    }
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvgitCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
